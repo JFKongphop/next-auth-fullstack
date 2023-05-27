@@ -125,9 +125,9 @@ const Register = () => {
             type="text"
             placeholder="example"
             errors={errors?.firstname?.message}
-            disabled={isSubmitting}
-            icon={<CiUser/>}
+            icon={<CiUser />}
             register={register as unknown as UseFormRegister<FieldValues>}
+            defaultValue={''}          
           />
           <Input 
             name="lastname"
@@ -135,9 +135,9 @@ const Register = () => {
             type="text"
             placeholder="example"
             errors={errors?.lastname?.message}
-            disabled={isSubmitting}
-            icon={<CiUser/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
+            icon={<CiUser />}
+            register={register as unknown as UseFormRegister<FieldValues>} 
+            defaultValue={''}          
           />
         </div>
         <div className="flex flex-col">
@@ -147,9 +147,9 @@ const Register = () => {
             type="email"
             placeholder="example@gmail.com"
             errors={errors?.email?.message}
-            disabled={isSubmitting}
-            icon={<FiMail/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
+            icon={<FiMail />}
+            register={register as unknown as UseFormRegister<FieldValues>} 
+            defaultValue={''}          
           />
           <Input 
             name="phone"
@@ -157,9 +157,9 @@ const Register = () => {
             type="text"
             placeholder="123-456-7890"
             errors={errors?.phone?.message}
-            disabled={isSubmitting}
-            icon={<BsTelephone/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
+            icon={<BsTelephone />}
+            register={register as unknown as UseFormRegister<FieldValues>} 
+            defaultValue={''}          
           />
           <Input 
             name="password"
@@ -167,9 +167,9 @@ const Register = () => {
             type="password"
             placeholder="********"
             errors={errors?.password?.message}
-            disabled={isSubmitting}
-            icon={<FiLock/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
+            icon={<FiLock />}
+            register={register as unknown as UseFormRegister<FieldValues>} 
+            defaultValue={''}         
           />
           {watch('password')?.length > 0 && (
             <div className="flex mt-2">
@@ -194,9 +194,9 @@ const Register = () => {
             type="password"
             placeholder="********"
             errors={errors?.confirmPassword?.message}
-            disabled={isSubmitting}
-            icon={<FiLock/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
+            icon={<FiLock />}
+            register={register as unknown as UseFormRegister<FieldValues>} 
+            defaultValue={''}          
           />
         </div>
         <div className="flex item-center mt-3">

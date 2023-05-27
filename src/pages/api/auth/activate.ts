@@ -26,7 +26,7 @@ export default async function handler(
     const { token } = req.body;
     const userToken = jwt.verify(
       token, 
-      ACTIVATION_TOKEN_SECRET as string
+      ACTIVATION_TOKEN_SECRET!
     ) as UserToken;
 
     /* Check email is already verified and activate it */

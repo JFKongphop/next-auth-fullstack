@@ -3,14 +3,14 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import type { NextApiRequest, NextApiResponse } from 'next';
-
 import User from '@/models/User';
 import connectDB from '@/utils/connectDB';
 
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 const { RESET_TOKEN_SECRET } = process.env;
 
-type UserToken = {
+export type UserToken = {
   id: string;
   iat: number;
   exp: number;
@@ -27,9 +27,8 @@ export default async function handler(
     const { password, token } = req.body;
     const userToken = jwt.verify(
       token, 
-      RESET_TOKEN_SECRET as string
+      RESET_TOKEN_SECRET!
     ) as UserToken;
-
 
     /* Check email is already verified and activate it */
     const userDB = await User.findById(userToken.id);

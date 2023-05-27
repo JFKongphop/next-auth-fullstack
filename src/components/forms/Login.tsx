@@ -64,7 +64,6 @@ const Login: React.FC<ILogin> = ({
     catch (error) {
       toast.error((error as Error).message);
     }
-    console.log(values);
   };
 
   return (
@@ -117,9 +116,9 @@ const Login: React.FC<ILogin> = ({
             type="email"
             placeholder="example@gmail.com"
             errors={errors?.email?.message}
-            disabled={isSubmitting}
-            icon={<FiMail/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
+            icon={<FiMail />}
+            register={register as unknown as UseFormRegister<FieldValues>} 
+            defaultValue={''}          
           />
           <Input 
             name="password"
@@ -127,9 +126,9 @@ const Login: React.FC<ILogin> = ({
             type="password"
             placeholder="********"
             errors={errors?.password?.message}
-            disabled={isSubmitting}
-            icon={<FiLock/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
+            icon={<FiLock />}
+            register={register as unknown as UseFormRegister<FieldValues>} 
+            defaultValue={''}          
           />
         </div>
         <div className="py-2 hover:underline min-w-fit">

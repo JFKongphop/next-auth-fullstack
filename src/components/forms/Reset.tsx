@@ -109,9 +109,9 @@ const Reset: React.FC<IReset> = ({ token }) => {
             type="password"
             placeholder="********"
             errors={errors?.password?.message}
-            disabled={isSubmitting}
-            icon={<FiLock/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
+            icon={<FiLock />}
+            register={register as unknown as UseFormRegister<FieldValues>} 
+            defaultValue={''}          
           />
           {watch('password')?.length > 0 && (
             <div className="flex mt-2">
@@ -136,10 +136,8 @@ const Reset: React.FC<IReset> = ({ token }) => {
             type="password"
             placeholder="********"
             errors={errors?.confirmPassword?.message}
-            disabled={isSubmitting}
-            icon={<FiLock/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
-          />
+            icon={<FiLock />}
+            register={register as unknown as UseFormRegister<FieldValues>} defaultValue={''}          />
         </div>
         <SlideButton
           type="submit"

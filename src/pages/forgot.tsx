@@ -2,10 +2,13 @@
 
 import Background from '@/components/backgrounds/Background';
 import ForgotForm from '@/components/forms/Forgot';
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 
 const Forgot = ({ }) => {
+  const { data: session } = useSession();
+  console.log(session)
   return (
     <div className="w-full items-center justify-center">
       <div className="w-full h-100 flex item-center justify-center">

@@ -34,7 +34,7 @@ export default Reset;
 export async function getServerSideProps(ctx: NextPageContext) {
   const { query } = ctx;
   const token = query.token;
-  console.log(token)
+  console.log('reset', token)
   return {
     props: {
       token

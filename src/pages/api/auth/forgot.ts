@@ -1,14 +1,12 @@
 /* Forgot password send email to user and link direct to page for reset pasword when click the button in email */
 
-import type { NextApiRequest, NextApiResponse } from 'next';
-
 import User from '@/models/User';
 import connectDB from '@/utils/connectDB';
+import sendMail from '@/utils/sendMail';
 import { createResetToken } from '@/utils/jwt';
 import { resetPasswordEmail } from '@/emailTemplates/reset';
-import sendMail from '@/utils/sendMail';
 
-const { ACTIVATION_TOKEN_SECRET } = process.env;
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,

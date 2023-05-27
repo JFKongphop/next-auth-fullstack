@@ -16,8 +16,8 @@ interface IInput {
   label: string;
   type: string;
   placeholder: string;
+  defaultValue: string;
   errors: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
-  disabled: boolean
   icon: JSX.Element;
   register: UseFormRegister<FieldValues>;
 }
@@ -28,7 +28,7 @@ const Input: React.FC<IInput> = ({
   type,
   placeholder,
   errors,
-  disabled,
+  defaultValue,
   icon,
   register
 }) => {
@@ -59,6 +59,7 @@ const Input: React.FC<IInput> = ({
             outline-offset-2 outline-transparent border-2
             text-sm outline-none placeholder:text-gray-300
           `}
+          defaultValue={defaultValue}
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
           {...register(name)}

@@ -76,9 +76,9 @@ const Forgot = ({}) => {
             type="email"
             placeholder="example@gmail.com"
             errors={errors?.email?.message}
-            disabled={isSubmitting}
-            icon={<FiMail/>}
-            register={register as unknown as UseFormRegister<FieldValues>}
+            icon={<FiMail />}
+            register={register as unknown as UseFormRegister<FieldValues>} 
+            defaultValue={''}          
           />
         </div>
         <SlideButton

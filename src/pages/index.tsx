@@ -6,22 +6,70 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { SiUdemy } from "react-icons/si";
 import { AiFillGithub } from "react-icons/ai";
 import { text1, text2 } from "@/asset/text";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+type DataResponse = {
+  message: string;
+  token: string;
+}
 
 export default function Home() {
   const { data: session } = useSession();
+  // console.log(session)
+
+  const router = useRouter();
+
+  const editProfileHandler = async () => {
+    try {
+      const { data } = await axios.post<DataResponse>(
+        '/api/edit/edit-redirect', { 
+        email: session?.user.email 
+      });
+
+      router.push(`/edit/${data.token}`);
+    }
+    catch {
+      toast.error('Cannot edit profile')
+    }
+  }
+
+  const editStatus: boolean = session?.user.provider === 'credentials';
 
   return (
-    <div className="home bg-black min-h-screen text-white flex items-center justify-center">
+    <div 
+      className="
+          home bg-black min-h-screen text-white
+          flex items-center justify-center
+        "
+      >
       <div className="container mx-auto">
-        <div className="border border-white relative flex flex-col w-full rounded-lg">
+        <div 
+          className="
+            border border-white relative 
+            flex flex-col w-full rounded-lg
+          "
+        >
           <div className="flex flex-wrap justify-center items-center">
-            <div className="w-full text-right">
-              <div className="py-3 px-3">
-                <button
+            <div className={`${!editStatus && 'text-right'} w-full`}>
+              <div className={`py-3 px-3  ${editStatus && 'flex justify-between'}`}>
+                {editStatus && (<button
                   className="
                     bg-blue-500 hover:bg-blue-700 text-md 
                     uppercase font-bold px-8 py-2 rounded-md 
-                    sm:mr-2 mb-1 ease-linear transition-all 
+                    mb-1 ease-linear transition-all 
+                    duration-150
+                  "
+                  onClick={editProfileHandler}
+                >
+                  Edit Profile
+                </button>)}
+                <button
+                  className="
+                    bg-red-500 hover:bg-red-700 text-md 
+                    uppercase font-bold px-8 py-2 rounded-md 
+                    mb-1 ease-linear transition-all 
                     duration-150
                   "
                   onClick={() => signOut()}

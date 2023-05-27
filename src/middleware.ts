@@ -11,11 +11,9 @@ export const middleware = async (req: NextRequest) => {
     secret: process.env.NEXTAUTH_SECRET,
     secureCookie: process.env.NODE_ENV === 'production',
   });
-
-  // console.log('middleware', session);
   
   // when the session is null redirect the page to index for protect the route
-  if (pathname === '/') {
+  if (pathname === '/' || pathname.includes('/edit/')) {
     if (!session) return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/auth`);
   }
 

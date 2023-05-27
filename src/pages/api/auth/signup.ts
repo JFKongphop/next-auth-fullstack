@@ -1,13 +1,15 @@
 /* Register account */
 
-import User from '@/models/User';
-import connectDB from '@/utils/connectDB';
-import type { NextApiRequest, NextApiResponse } from 'next';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
+
+import User from '@/models/User';
+import connectDB from '@/utils/connectDB';
 import { createActivationToken } from '@/utils/jwt';
 import sendMail from '@/utils/sendMail';
 import { activateTemplateEmail } from '@/emailTemplates/activate';
+
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
