@@ -1,11 +1,15 @@
-import { v2 } from "cloudinary"
+import { v2 } from "cloudinary";
+
+const { 
+  CLOUDNAME,
+  API_KEY,
+  API_SECRET
+} = process.env;
 
 v2.config({
-  cloud_name: "dhmldscyn",
-  api_key: "516587632479369",
-  api_secret: "IDzwZvDnT9G382Vor2liXYD8IZk"
+  cloud_name: CLOUDNAME,
+  api_key: API_KEY,
+  api_secret: API_SECRET
 });
-
-
 
 export default v2;
