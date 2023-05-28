@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import User from '@/models/User';
 import connectDB from '@/utils/connectDB';
 
-import type { UserDefault } from '@/components/forms/Edit';
+import type { UserResponse } from '@/components/forms/Edit';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import type { UserToken } from '../auth/reset';
 
@@ -31,11 +31,12 @@ export default async function profile(
       .json({ message: 'This account no longer exist.' });
     
     const name: string = user.name.split(' ');
-    const userData: UserDefault = {
+    const userData: UserResponse = {
       firstname: name[0],
       lastname: name[1],
-      phone: user.phone
-    }
+      phone: user.phone,
+      image: user.image
+    };
 
     // console.log(userData)
 

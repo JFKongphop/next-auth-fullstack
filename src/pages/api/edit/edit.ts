@@ -1,3 +1,4 @@
+
 /* Edit user profile to database  */
 import jwt from 'jsonwebtoken';
 
@@ -5,6 +6,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import User from '@/models/User';
 import connectDB from '@/utils/connectDB';
+import cloudinary from '@/utils/cloudinaryConfig';
 
 const { EDIT_TOKEN_SECRET } = process.env;
 
@@ -26,8 +28,11 @@ export default async function handler(
       token,
       firstname,
       lastname,
-      phone
+      phone,
+      image,
+      oldUrl
     } = req.body;
+
     const userToken = jwt.verify(
       token,
       EDIT_TOKEN_SECRET!
@@ -38,13 +43,37 @@ export default async function handler(
     if (!user) return res
       .status(400)
       .json({ message: 'This account no longer exist.' });
-    
-    /* Edit user profile */
+
+    /* Upload image to cloudinary */
     const name = `${firstname} ${lastname}`
-    await User.findByIdAndUpdate(user.id, {
-      name,
-      phone
-    })
+    if (image) {
+      const newImage = await cloudinary.uploader.upload(image, {
+        folder: 'profile-upload',
+        public_id: (Date.now()).toString(),
+        crop: 'scale'
+      });
+
+      /* Edit user profile with image */
+      if (!(
+        user.image === 
+        'https://res.cloudinary.com/dmhcnhtng/image/upload/v1664642479/992490_sskqn3.png'
+        || (!user.image.includes(oldUrl))
+      )) await cloudinary.uploader.destroy(oldUrl);
+
+      await User.findByIdAndUpdate(user.id, {
+        name,
+        phone,
+        image: newImage.url
+      });
+    }
+
+    else {
+      /* Edit user profile without image */
+      await User.findByIdAndUpdate(user.id, {
+        name,
+        phone,
+      });
+    }
 
     res
       .status(200)
@@ -53,6 +82,7 @@ export default async function handler(
       });
   }
   catch (error) {
+    console.log(error)
     res
       .status(500)
       .json({ message: (error as Error).message });
