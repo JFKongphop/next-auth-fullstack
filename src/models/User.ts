@@ -39,3 +39,25 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 export default User;
+
+// import mongoose from 'mongoose';
+
+// const userSchema = new mongoose.Schema({
+//   address: {
+//     type: String,
+//     require: true,
+//     unique: true,
+//   },
+//   email: {
+//     type: String,
+//     default: ''
+//   },
+//   activated_email: {
+//     type: Boolean,
+//     default: false
+//   }
+// });
+
+// const User = mongoose.models.User || mongoose.model('User', userSchema);
+
+// export default User;
