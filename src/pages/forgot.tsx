@@ -17,7 +17,7 @@ const Forgot = ({ }) => {
             bg-white flex flex-col items-center justify-center
           "
         >          
-         <ForgotForm />
+        <ForgotForm />
         </div>
         <Background 
           image={`../../auth/reset.jpg`} 
